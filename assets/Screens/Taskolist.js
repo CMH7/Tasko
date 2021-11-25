@@ -1,17 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
-  Text,
   StyleSheet,
   Image,
   StatusBar,
   Dimensions,
+  ScrollView,
 } from "react-native";
 
 {
   /*Own import*/
 }
 import colors from "../config/colors";
+
+{
+  /*Plugins*/
+}
+import BouncyCheckbox from "react-native-bouncy-checkbox";
 
 let width = Dimensions.get("window").width;
 {
@@ -21,6 +26,8 @@ let fontSizem = 0.23;
 let fontWelcomeSize = width * fontSizem;
 
 function Taskolist({ route, navigation }) {
+  const [isChecked, setIsChecked] = useState(false);
+
   return (
     <View style={styles.container}>
       {/* Sets the status bar properties and styles for this Screen*/}
@@ -33,11 +40,31 @@ function Taskolist({ route, navigation }) {
         <Image style={styles.logo} source={require("../img/TaskoLogo.png")} />
         <View style={styles.profileIcon}></View>
       </View>
-      <View>
-        <Text style={{ fontFamily: "GothamLight" }}>
-          Hey, {route.params.callname} This is the list of you Taskos'
-        </Text>
-      </View>
+
+      <ScrollView>
+        <View style={styles.taskwrapper}>
+          <BouncyCheckbox
+            size={40}
+            fillColor="red"
+            text="Try"
+            textStyle={{ fontFamily: "GothamMedium", color: colors.gray }}
+            unfillColor="#FFFFFF"
+            iconStyle={{ borderColor: "red" }}
+            onPress={(isChecked) => {}}
+          />
+        </View>
+        <View style={styles.taskwrapper}>
+          <BouncyCheckbox
+            size={40}
+            fillColor="red"
+            text="Try"
+            textStyle={{ fontFamily: "GothamMedium", color: colors.gray }}
+            unfillColor="#FFFFFF"
+            iconStyle={{ borderColor: "red" }}
+            onPress={(isChecked) => {}}
+          />
+        </View>
+      </ScrollView>
     </View>
   );
 }
@@ -70,6 +97,16 @@ const styles = StyleSheet.create({
     height: "100%",
     backgroundColor: colors.gray,
     borderRadius: 200,
+  },
+
+  taskwrapper: {
+    borderWidth: 1,
+    height: 50,
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    paddingLeft: 5,
+    marginTop: "2%",
   },
 });
 
