@@ -5,7 +5,9 @@ import { Text } from "react-native";
 
 export default function App() {
   const [loaded] = useFonts({
-    GothamBold: require("./assets/fonts/Gotham-Font/Gotham-Black.otf"),
+    GothamBlack: require("./assets/fonts/Gotham-Font/Gotham-Black.otf"),
+    GothamBold: require("./assets/fonts/Gotham-Font/Gotham-Bold.otf"),
+    GothamBook: require("./assets/fonts/Gotham-Font/GothamBook.otf"),
     GothamBoldItalic: require("./assets/fonts/Gotham-Font/Gotham-BookItalic.otf"),
     GothamLight: require("./assets/fonts/Gotham-Font/Gotham-Light.otf"),
     GothamThin: require("./assets/fonts/Gotham-Font/Gotham-Thin.otf"),
@@ -13,6 +15,7 @@ export default function App() {
     GothamUltraItalic: require("./assets/fonts/Gotham-Font/Gotham-UltraItalic.otf"),
     GothamXLight: require("./assets/fonts/Gotham-Font/Gotham-XLight.otf"),
     GothamXLightItalic: require("./assets/fonts/Gotham-Font/Gotham-XLightItalic.otf"),
+    GothamMedium: require("./assets/fonts/Gotham-Font/GothamMedium.otf"),
   });
 
   if (!loaded) {

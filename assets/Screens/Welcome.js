@@ -6,6 +6,7 @@ import {
   Text,
   Dimensions,
   Image,
+  Pressable,
 } from "react-native";
 
 import colors from "../config/colors.js";
@@ -14,8 +15,8 @@ let width = Dimensions.get("window").width;
 {
   /*increasing "fontSizem" means smaller fontsize*/
 }
-let fontSizem = 5;
-let fontWelcomeSize = width / fontSizem;
+let fontSizem = 0.23;
+let fontWelcomeSize = width * fontSizem;
 
 let leftPosWelcomeText = (width - fontWelcomeSize) / 2;
 
@@ -35,12 +36,21 @@ function Welcome() {
       <View style={styles.circle2b}></View>
       <View style={styles.circle1b}></View>
 
-      {/*Tasko name*/}
-      <Image
-        source={require("../img/TaskoLogo.png")}
-        style={styles.TaskoLogo}
-      />
-      <Text style={styles.ASKO}>ASKO</Text>
+      {/*Tasko name and logo*/}
+      <View style={styles.logoContainer}>
+        <Image
+          source={require("../img/TaskoLogo.png")}
+          style={styles.TaskoLogo}
+        />
+        <Text style={styles.ASKO}>ASKO</Text>
+      </View>
+
+      {/*Button*/}
+      <Pressable style={styles.button}>
+        <View>
+          <Text style={styles.btnText}>START NOW!</Text>
+        </View>
+      </Pressable>
     </View>
   );
 }
@@ -94,24 +104,50 @@ const styles = StyleSheet.create({
     bottom: -75,
   },
 
-  ASKO: {
+  logoContainer: {
+    width: "100%",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
     position: "absolute",
     top: "30%",
-    left: leftPosWelcomeText - 25,
-    fontFamily: "GothamBold",
+  },
+
+  ASKO: {
+    fontFamily: "GothamMedium",
     fontSize: fontWelcomeSize,
     color: colors.gray,
     textShadowColor: "rgba(0, 0, 0, 0.4)",
     textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 10,
+    alignSelf: "flex-end",
+    marginLeft: "-4%",
   },
 
   TaskoLogo: {
     width: 95,
     height: 95,
+  },
+
+  button: {
+    width: "60%",
+    height: 65,
+    backgroundColor: colors.purple,
     position: "absolute",
-    top: "28%",
-    left: "12%",
+    top: "70%",
+    left: "20%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 100,
+    elevation: 10,
+  },
+
+  btnText: {
+    color: "white",
+    fontFamily: "GothamBold",
+    fontSize: fontWelcomeSize / 3.5,
   },
 });
 
