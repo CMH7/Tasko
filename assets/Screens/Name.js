@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import {
-  StyleSheet,
   View,
+  StyleSheet,
   StatusBar,
   Text,
   Dimensions,
-  Image,
+  TextInput,
   Pressable,
 } from "react-native";
 
-import colors from "../config/colors.js";
+{
+  /*Importing the colors palette*/
+}
+import colors from "../config/colors";
 
 let width = Dimensions.get("window").width;
 {
@@ -18,7 +21,16 @@ let width = Dimensions.get("window").width;
 let fontSizem = 0.23;
 let fontWelcomeSize = width * fontSizem;
 
-function Welcome({ navigation }) {
+function Name({ navigation }) {
+  const [name, setName] = useState("");
+
+  const checkTextInput = () => {
+    if (!name.trim()) {
+      alert("Please enter your name");
+      return false;
+    }
+    return true;
+  };
   return (
     <View style={styles.container}>
       {/* Sets the status bar properties and styles for this Screen*/}
@@ -32,26 +44,26 @@ function Welcome({ navigation }) {
       <View style={styles.circle2}></View>
       <View style={styles.circle1}></View>
       <View style={styles.circle2b}></View>
-      <View style={styles.circle1b}></View>
-
-      {/*Tasko name and logo*/}
-      <View style={styles.logoContainer}>
-        <Image
-          source={require("../img/TaskoLogo.png")}
-          style={styles.TaskoLogo}
-        />
-        <Text style={styles.ASKO}>ASKO</Text>
-      </View>
-
-      {/*Button*/}
       <Pressable
-        style={styles.button}
-        onPress={() => navigation.navigate("Name")}
+        style={styles.circle1b}
+        onPress={() => {
+          if (checkTextInput())
+            navigation.navigate("Taskolist", { callname: name });
+        }}
       >
-        <View>
-          <Text style={styles.btnText}>START NOW!</Text>
+        <View style={styles.cont}>
+          <Text style={styles.nxtbtntxt}>Next</Text>
         </View>
       </Pressable>
+
+      {/*input name*/}
+      <Text style={styles.how}>Hi, how shall we call you?</Text>
+      <TextInput
+        placeholder="Insert your name"
+        style={styles.textinput}
+        value={name}
+        onChangeText={(name) => setName(name)}
+      />
     </View>
   );
 }
@@ -61,6 +73,10 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     backgroundColor: "#fff",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: "5%",
   },
 
   circle1: {
@@ -105,51 +121,38 @@ const styles = StyleSheet.create({
     bottom: -75,
   },
 
-  logoContainer: {
-    width: "100%",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    position: "absolute",
-    top: "30%",
-  },
-
-  ASKO: {
-    fontFamily: "GothamMedium",
-    fontSize: fontWelcomeSize,
-    color: colors.gray,
-    textShadowColor: "rgba(0, 0, 0, 0.4)",
-    textShadowOffset: { width: 1, height: 1 },
-    textShadowRadius: 10,
-    alignSelf: "flex-end",
-    marginLeft: "-4%",
-  },
-
-  TaskoLogo: {
-    width: 95,
-    height: 95,
-  },
-
-  button: {
-    width: "60%",
-    height: 65,
-    backgroundColor: colors.purple,
-    position: "absolute",
-    top: "70%",
-    left: "20%",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 100,
-    elevation: 10,
-  },
-
-  btnText: {
-    color: "white",
+  how: {
     fontFamily: "GothamBold",
-    fontSize: fontWelcomeSize / 3.5,
+    fontSize: fontWelcomeSize / 2.5,
+    color: colors.gray,
+  },
+
+  textinput: {
+    marginTop: "10%",
+    height: 40,
+    width: "80%",
+    borderWidth: 3,
+    borderColor: colors.purple,
+    borderRadius: 20,
+    backgroundColor: "white",
+    elevation: 10,
+    paddingLeft: "2%",
+    fontFamily: "GothamMedium",
+    fontSize: fontWelcomeSize / 4.5,
+    color: colors.gray,
+  },
+
+  cont: {
+    position: "relative",
+    top: "20%",
+    left: "15%",
+  },
+
+  nxtbtntxt: {
+    color: "white",
+    fontFamily: "GothamMedium",
+    fontSize: fontWelcomeSize / 2,
   },
 });
 
-export default Welcome;
+export default Name;

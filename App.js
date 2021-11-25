@@ -1,7 +1,19 @@
 import React from "react";
+
+{
+  /*Importing screens*/
+}
 import Welcome from "./assets/Screens/Welcome";
+import Name from "./assets/Screens/Name";
+import Taskolist from "./assets/Screens/Taskolist";
+
+{
+  /*plugins*/
+}
 import { useFonts } from "expo-font";
 import { Text } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 export default function App() {
   const [loaded] = useFonts({
@@ -22,5 +34,27 @@ export default function App() {
     return <Text>App is loading fonts.</Text>;
   }
 
-  return <Welcome />;
+  const Stack = createNativeStackNavigator();
+
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Welcome"
+          component={Welcome}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Name"
+          component={Name}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Taskolist"
+          component={Taskolist}
+          options={{ headerShown: false }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
 }
