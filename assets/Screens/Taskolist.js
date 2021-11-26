@@ -8,7 +8,6 @@ import {
   Pressable,
   Modal,
   Text,
-  Alert,
   TextInput,
   ScrollView,
   Keyboard,
@@ -110,6 +109,7 @@ function Taskolist({ route, navigation }) {
               value={tasko}
               onChangeText={(text) => setTasko(text)}
               style={styles.TaskoInput}
+              maxLength={30}
             />
           </View>
           <Pressable

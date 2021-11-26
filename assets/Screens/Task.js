@@ -9,19 +9,20 @@ import colors from "../config/colors";
 
 function Task(props) {
   return (
-    <View style={styles.cont}>
+    <View style={styles.container}>
       <BouncyCheckbox
         size={40}
         fillColor={colors.greenLight}
         text={props.taskoname}
         textStyle={styles.text}
       />
+      <View style={styles.del}></View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  cont: {
+  container: {
     paddingHorizontal: 20,
     paddingVertical: 8,
   },
@@ -29,6 +30,16 @@ const styles = StyleSheet.create({
   text: {
     color: colors.gray,
     fontFamily: "GothamMedium",
+  },
+
+  del: {
+    width: 30,
+    height: "80%",
+    position: "absolute",
+    top: "25%",
+    right: "5%",
+    backgroundColor: "red",
+    borderRadius: 20,
   },
 });
 

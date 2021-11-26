@@ -1,4 +1,5 @@
 import React from "react";
+import { Text } from "react-native";
 
 {
   /*Importing screens*/
@@ -11,7 +12,6 @@ import Taskolist from "./assets/Screens/Taskolist";
   /*plugins*/
 }
 import { useFonts } from "expo-font";
-import { Text } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 

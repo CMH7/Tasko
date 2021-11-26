@@ -9,14 +9,17 @@ import {
   Pressable,
 } from "react-native";
 
+{
+  /*Own imports*/
+}
 import colors from "../config/colors.js";
 
-let width = Dimensions.get("window").width;
+let devicewidth = Dimensions.get("window").width;
 {
   /*increasing "fontSizem" means smaller fontsize*/
 }
 let fontSizem = 0.23;
-let fontWelcomeSize = width * fontSizem;
+let fontWelcomeSize = devicewidth * fontSizem;
 
 function Welcome({ navigation }) {
   return (
@@ -48,9 +51,7 @@ function Welcome({ navigation }) {
         style={styles.button}
         onPress={() => navigation.navigate("Name")}
       >
-        <View>
-          <Text style={styles.btnText}>START NOW!</Text>
-        </View>
+        <Text style={styles.btnText}>START NOW!</Text>
       </Pressable>
     </View>
   );

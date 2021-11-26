@@ -14,12 +14,12 @@ import {
 }
 import colors from "../config/colors";
 
-let width = Dimensions.get("window").width;
+let devicewidth = Dimensions.get("window").width;
 {
   /*increasing "fontSizem" means smaller fontsize*/
 }
 let fontSizem = 0.23;
-let fontWelcomeSize = width * fontSizem;
+let fontWelcomeSize = devicewidth * fontSizem;
 
 function Name({ navigation }) {
   const [name, setName] = useState("");
@@ -31,6 +31,7 @@ function Name({ navigation }) {
     }
     return true;
   };
+
   return (
     <View style={styles.container}>
       {/* Sets the status bar properties and styles for this Screen*/}
@@ -63,7 +64,7 @@ function Name({ navigation }) {
       <Text style={styles.how}>Hi, how shall we call you?</Text>
       <TextInput
         placeholder="Insert your name"
-        maxLength={30}
+        maxLength={15}
         style={styles.textinput}
         value={name}
         onChangeText={(name) => setName(name)}
