@@ -48,7 +48,10 @@ function Name({ navigation }) {
         style={styles.circle1b}
         onPress={() => {
           if (checkTextInput())
-            navigation.navigate("Taskolist", { callname: name });
+            navigation.navigate("Taskolist", {
+              callname: name.toUpperCase() + "'s",
+              namelength: name.length,
+            });
         }}
       >
         <View style={styles.cont}>

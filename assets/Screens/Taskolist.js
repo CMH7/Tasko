@@ -22,10 +22,10 @@ import colors from "../config/colors";
 import Task from "./Task";
 
 let devicewidth = Dimensions.get("window").width;
+let fontSizem = 0.23;
 {
   /*increasing "fontSizem" means smaller fontsize*/
 }
-let fontSizem = 0.23;
 let fontWelcomeSize = devicewidth * fontSizem;
 
 function Taskolist({ route, navigation }) {
@@ -57,9 +57,18 @@ function Taskolist({ route, navigation }) {
         backgroundColor={colors.purple}
         translucent={false}
       />
+
+      {/* Header of the application */}
       <View style={styles.header}>
         <Image style={styles.logo} source={require("../img/TaskoLogo.png")} />
-        <Text style={styles.headertxt}>{route.params.callname} Taskos</Text>
+        <Text
+          style={[
+            styles.headertxt,
+            { fontSize: devicewidth / (route.params.namelength + 7) },
+          ]}
+        >
+          {route.params.callname} Taskos
+        </Text>
         <View style={styles.profileIcon}></View>
       </View>
 
@@ -163,7 +172,6 @@ const styles = StyleSheet.create({
 
   headertxt: {
     fontFamily: "GothamBold",
-    fontSize: 40,
   },
 
   plusIcon: {
