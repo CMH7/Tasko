@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 {
   /*Importing screens*/
@@ -6,6 +6,7 @@ import React from "react";
 import Welcome from "./assets/Screens/Welcome";
 import Name from "./assets/Screens/Name";
 import Taskolist from "./assets/Screens/Taskolist";
+import Task from "./assets/Screens/Task";
 
 {
   /*plugins*/
@@ -57,4 +58,9 @@ export default function App() {
       </Stack.Navigator>
     </NavigationContainer>
   );
+  {
+    /*
+    <Task taskoname="Tasko task" />;
+    */
+  }
 }

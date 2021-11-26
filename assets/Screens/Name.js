@@ -60,6 +60,7 @@ function Name({ navigation }) {
       <Text style={styles.how}>Hi, how shall we call you?</Text>
       <TextInput
         placeholder="Insert your name"
+        maxLength={30}
         style={styles.textinput}
         value={name}
         onChangeText={(name) => setName(name)}
