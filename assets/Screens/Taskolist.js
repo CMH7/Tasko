@@ -71,8 +71,9 @@ function Taskolist({ route, navigation }) {
         <View style={styles.profileIcon}></View>
       </View>
 
+      {/* tasko lists */}
       <ScrollView>
-        <View>
+        <View style={styles.taskolistCont}>
           {
             /* Map items from the taskItems and show them as tasks */
             taskos.map((item, index) => {
@@ -81,7 +82,7 @@ function Taskolist({ route, navigation }) {
                   key={index}
                   onPress={() => completeTasko(index)}
                 >
-                  <Task taskoname={item} />
+                  <Task text={item} />
                 </TouchableOpacity>
               );
             })
@@ -109,7 +110,7 @@ function Taskolist({ route, navigation }) {
               value={tasko}
               onChangeText={(text) => setTasko(text)}
               style={styles.TaskoInput}
-              maxLength={30}
+              maxLength={13}
             />
           </View>
           <Pressable
@@ -142,7 +143,7 @@ const styles = StyleSheet.create({
   bgCircle: {
     width: 5000,
     height: 5000,
-    backgroundColor: colors.lightPink,
+    backgroundColor: colors.purple,
     borderRadius: 1000,
     position: "absolute",
     left: "-25%",
@@ -155,6 +156,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+    marginBottom: "5%",
   },
 
   logo: {
@@ -237,6 +239,15 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontFamily: "GothamMedium",
     backgroundColor: colors.purple,
+  },
+
+  taskolistCont: {
+    width: "100%",
+    height: "100%",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    flexWrap: "wrap",
   },
 });
 
