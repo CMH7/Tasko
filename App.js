@@ -14,6 +14,15 @@ import Taskolist from "./assets/Screens/Taskolist";
 import { useFonts } from "expo-font";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import API from "./assets/Screens/API";
+import GetData from "./assets/components/GetData";
+import PostData from "./assets/components/PostData";
+import Post from "./assets/Screens/Post";
+import Update from "./assets/Screens/Update";
+import UpdateData from "./assets/components/UpdateData";
+import Get from "./assets/Screens/Get";
+import Delete from "./assets/Screens/Delete";
+import DeleteData from "./assets/components/DeleteData";
 
 export default function App() {
   const [loaded] = useFonts({
@@ -52,6 +61,51 @@ export default function App() {
         <Stack.Screen
           name="Taskolist"
           component={Taskolist}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="API"
+          component={API}
+          options={{ headerShown: false, animation: "slide_from_left" }}
+        />
+        <Stack.Screen
+          name="postScreen"
+          component={Post}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="postAPI"
+          component={PostData}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="getScreen"
+          component={Get}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="getAPI"
+          component={GetData}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="updateScreen"
+          component={Update}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="updateAPI"
+          component={UpdateData}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="deleteScreen"
+          component={Delete}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="deleteAPI"
+          component={DeleteData}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

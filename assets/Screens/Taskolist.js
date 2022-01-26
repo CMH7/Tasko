@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import { useFocusEffect } from "@react-navigation/native";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import {
   View,
   StyleSheet,
@@ -12,6 +14,8 @@ import {
   ScrollView,
   Keyboard,
   TouchableOpacity,
+  BackHandler,
+  Alert,
 } from "react-native";
 
 {
@@ -44,6 +48,30 @@ function Taskolist({ route, navigation }) {
     itemsCopy.splice(index, 1);
     setTaskos(itemsCopy);
   };
+
+  {
+    /*Handle back button*/
+  }
+  useFocusEffect(
+    React.useCallback(() => {
+      const onBackPress = () => {
+        Alert.alert("Exit Tasko", "You want to leave?", [
+          {
+            text: "Cancel",
+            onPress: () => null,
+            style: "cancel",
+          },
+          { text: "YES", onPress: () => BackHandler.exitApp() },
+        ]);
+        return true;
+      };
+
+      BackHandler.addEventListener("hardwareBackPress", onBackPress);
+
+      return () =>
+        BackHandler.removeEventListener("hardwareBackPress", onBackPress);
+    }, [])
+  );
 
   return (
     <View style={styles.container}>
@@ -127,6 +155,10 @@ function Taskolist({ route, navigation }) {
 
       <Pressable style={styles.plusIcon} onPress={() => setModalVisible(true)}>
         <Text style={styles.textStyle}>+</Text>
+      </Pressable>
+
+      <Pressable style={styles.Api} onPress={() => navigation.navigate("API")}>
+        <Text style={styles.Apii}>go to API</Text>
       </Pressable>
     </View>
   );
@@ -248,6 +280,23 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     flexWrap: "wrap",
+  },
+
+  Api: {
+    position: "absolute",
+    left: "4%",
+    bottom: "4%",
+    padding: 10,
+    borderRadius: 200,
+    backgroundColor: colors.lightPink,
+    elevation: 10,
+  },
+
+  Apii: {
+    color: colors.purple,
+    fontSize: fontWelcomeSize / 5,
+    fontFamily: "GothamBook",
+    textAlign: "center",
   },
 });
 

@@ -1,18 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import {
-  View,
   StyleSheet,
+  View,
   StatusBar,
   Text,
   Dimensions,
-  TextInput,
+  Image,
   Pressable,
 } from "react-native";
 
 {
-  /*Importing the colors palette*/
+  /*Own imports*/
 }
-import colors from "../config/colors";
+import colors from "../config/colors.js";
 
 let devicewidth = Dimensions.get("window").width;
 {
@@ -21,17 +21,7 @@ let devicewidth = Dimensions.get("window").width;
 let fontSizem = 0.23;
 let fontWelcomeSize = devicewidth * fontSizem;
 
-function Name({ navigation }) {
-  const [name, setName] = useState("");
-
-  const checkTextInput = () => {
-    if (!name.trim()) {
-      alert("Please enter your name");
-      return false;
-    }
-    return true;
-  };
-
+function Welcome({ navigation }) {
   return (
     <View style={styles.container}>
       {/* Sets the status bar properties and styles for this Screen*/}
@@ -45,32 +35,24 @@ function Name({ navigation }) {
       <View style={styles.circle2}></View>
       <View style={styles.circle1}></View>
       <View style={styles.circle2b}></View>
-      <Pressable
-        style={styles.circle1b}
-        onPress={() => {
-          if (checkTextInput()) {
-            navigation.replace("Taskolist", {
-              callname: name.toUpperCase() + "'s",
-              namelength: name.length,
-            });
-            setName("");
-          }
-        }}
-      >
-        <View style={styles.cont}>
-          <Text style={styles.nxtbtntxt}>Next</Text>
-        </View>
-      </Pressable>
+      <View style={styles.circle1b}></View>
 
-      {/*input name*/}
-      <Text style={styles.how}>Hi, how shall we call you?</Text>
-      <TextInput
-        placeholder="Insert your name"
-        maxLength={15}
-        style={styles.textinput}
-        value={name}
-        onChangeText={(name) => setName(name)}
-      />
+      {/*Tasko name and logo*/}
+      <View style={styles.logoContainer}>
+        <Image
+          source={require("../img/TaskoLogo.png")}
+          style={styles.TaskoLogo}
+        />
+        <Text style={styles.ASKO}>ASKO</Text>
+      </View>
+
+      {/*Button*/}
+      <Pressable
+        style={styles.button}
+        onPress={() => navigation.navigate("Name")}
+      >
+        <Text style={styles.btnText}>START NOW!</Text>
+      </Pressable>
     </View>
   );
 }
@@ -80,10 +62,6 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     backgroundColor: "#fff",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    padding: "5%",
   },
 
   circle1: {
@@ -128,38 +106,51 @@ const styles = StyleSheet.create({
     bottom: -75,
   },
 
-  how: {
-    fontFamily: "GothamBold",
-    fontSize: fontWelcomeSize / 2.5,
-    color: colors.gray,
+  logoContainer: {
+    width: "100%",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    position: "absolute",
+    top: "30%",
   },
 
-  textinput: {
-    marginTop: "10%",
-    height: 40,
-    width: "80%",
-    borderWidth: 3,
-    borderColor: colors.purple,
-    borderRadius: 20,
-    backgroundColor: "white",
+  ASKO: {
+    fontFamily: "GothamMedium",
+    fontSize: fontWelcomeSize,
+    color: colors.gray,
+    textShadowColor: "rgba(0, 0, 0, 0.4)",
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 10,
+    alignSelf: "flex-end",
+    marginLeft: "-4%",
+  },
+
+  TaskoLogo: {
+    width: 95,
+    height: 95,
+  },
+
+  button: {
+    width: "60%",
+    height: 65,
+    backgroundColor: colors.purple,
+    position: "absolute",
+    top: "70%",
+    left: "20%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 100,
     elevation: 10,
-    paddingLeft: "2%",
-    fontFamily: "GothamMedium",
-    fontSize: fontWelcomeSize / 4.5,
-    color: colors.gray,
   },
 
-  cont: {
-    position: "relative",
-    top: "20%",
-    left: "15%",
-  },
-
-  nxtbtntxt: {
+  btnText: {
     color: "white",
-    fontFamily: "GothamMedium",
-    fontSize: fontWelcomeSize / 2,
+    fontFamily: "GothamBold",
+    fontSize: fontWelcomeSize / 3.5,
   },
 });
 
-export default Name;
+export default Welcome;

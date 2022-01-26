@@ -1,32 +1,32 @@
 import React, { useState } from "react";
 import {
-  View,
-  StyleSheet,
-  StatusBar,
-  Text,
-  Dimensions,
-  TextInput,
   Pressable,
+  StyleSheet,
+  TextInput,
+  View,
+  Dimensions,
+  Text,
 } from "react-native";
 
 {
-  /*Importing the colors palette*/
+  /*import owns*/
 }
 import colors from "../config/colors";
 
 let devicewidth = Dimensions.get("window").width;
+let fontSizem = 0.23;
 {
   /*increasing "fontSizem" means smaller fontsize*/
 }
-let fontSizem = 0.23;
 let fontWelcomeSize = devicewidth * fontSizem;
 
-function Name({ navigation }) {
+function Post({ navigation }) {
   const [name, setName] = useState("");
+  const [price, setPrice] = useState("");
 
   const checkTextInput = () => {
-    if (!name.trim()) {
-      alert("Please enter your name");
+    if (!name.trim() && !price.trim()) {
+      alert("Invalid inputs");
       return false;
     }
     return true;
@@ -34,14 +34,6 @@ function Name({ navigation }) {
 
   return (
     <View style={styles.container}>
-      {/* Sets the status bar properties and styles for this Screen*/}
-      <StatusBar
-        barStyle={"default"}
-        backgroundColor={colors.purple}
-        translucent={false}
-      />
-
-      {/* This section are the circles of the Screen*/}
       <View style={styles.circle2}></View>
       <View style={styles.circle1}></View>
       <View style={styles.circle2b}></View>
@@ -49,28 +41,44 @@ function Name({ navigation }) {
         style={styles.circle1b}
         onPress={() => {
           if (checkTextInput()) {
-            navigation.replace("Taskolist", {
-              callname: name.toUpperCase() + "'s",
-              namelength: name.length,
+            navigation.navigate("postAPI", {
+              name: name,
+              price: price,
             });
             setName("");
+            setPrice("");
           }
         }}
       >
         <View style={styles.cont}>
-          <Text style={styles.nxtbtntxt}>Next</Text>
+          <Text style={styles.nxtbtntxt}>Post</Text>
         </View>
       </Pressable>
 
-      {/*input name*/}
-      <Text style={styles.how}>Hi, how shall we call you?</Text>
       <TextInput
-        placeholder="Insert your name"
-        maxLength={15}
+        placeholder="Name of Beer"
+        maxLength={13}
         style={styles.textinput}
         value={name}
         onChangeText={(name) => setName(name)}
       />
+      <TextInput
+        placeholder="Price of Beer"
+        maxLength={4}
+        style={styles.textinput}
+        keyboardType="number-pad"
+        value={price}
+        returnKeyType="go"
+        onChangeText={(price) => setPrice(price)}
+      />
+      {/*Uncomment below element for Sir raimehn's API if will be used*/}
+      {/* <TextInput
+          placeholder="description"
+          maxLength={13}
+          style={styles.textinput}
+          value={description}
+          onChangeText={(desc) => setDescription(desc)}
+        /> */}
     </View>
   );
 }
@@ -79,11 +87,53 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
     height: "100%",
-    backgroundColor: "#fff",
     display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    padding: "5%",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-evenly",
+    alignContent: "center",
+  },
+
+  container2: {
+    width: "100%",
+    height: "100%",
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-evenly",
+    alignContent: "center",
+    zIndex: 1000,
+  },
+
+  textinput: {
+    height: 50,
+    width: "80%",
+    borderWidth: 3,
+    borderColor: colors.purple,
+    borderRadius: 20,
+    backgroundColor: "white",
+    paddingLeft: "5%",
+    fontFamily: "GothamMedium",
+    fontSize: fontWelcomeSize / 4.5,
+    color: colors.gray,
+    marginBottom: "10%",
+    zIndex: 99,
+  },
+
+  postBtn: {
+    textAlign: "center",
+    textAlignVertical: "center",
+  },
+
+  presseble: {
+    borderRadius: 100,
+    width: "51%",
+    paddingTop: 20,
+    paddingBottom: 20,
+    marginTop: 50,
+    marginBottom: 10,
+    elevation: 5,
+    backgroundColor: "#fff",
   },
 
   circle1: {
@@ -95,6 +145,7 @@ const styles = StyleSheet.create({
     top: -225,
     left: "-50%",
     elevation: 20,
+    zIndex: 90,
   },
 
   circle2: {
@@ -105,6 +156,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     left: "30%",
     top: -75,
+    zIndex: 90,
   },
 
   circle1b: {
@@ -126,27 +178,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     right: "30%",
     bottom: -75,
-  },
-
-  how: {
-    fontFamily: "GothamBold",
-    fontSize: fontWelcomeSize / 2.5,
-    color: colors.gray,
-  },
-
-  textinput: {
-    marginTop: "10%",
-    height: 40,
-    width: "80%",
-    borderWidth: 3,
-    borderColor: colors.purple,
-    borderRadius: 20,
-    backgroundColor: "white",
-    elevation: 10,
-    paddingLeft: "2%",
-    fontFamily: "GothamMedium",
-    fontSize: fontWelcomeSize / 4.5,
-    color: colors.gray,
+    zIndex: 90,
   },
 
   cont: {
@@ -161,5 +193,4 @@ const styles = StyleSheet.create({
     fontSize: fontWelcomeSize / 2,
   },
 });
-
-export default Name;
+export default Post;
