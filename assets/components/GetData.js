@@ -1,9 +1,27 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { ScrollView, Text, View } from "react-native";
+import { BackHandler, Pressable, ScrollView, Text, View } from "react-native";
 import colors from "../config/colors";
+import { StackActions, useFocusEffect } from "@react-navigation/native";
 
 function GetData({ route, navigation }) {
+  {
+    /*Handle back button*/
+  }
+  useFocusEffect(
+    React.useCallback(() => {
+      const onBackPress = () => {
+        navigation.replace("API");
+        return true;
+      };
+
+      BackHandler.addEventListener("hardwareBackPress", onBackPress);
+
+      return () =>
+        BackHandler.removeEventListener("hardwareBackPress", onBackPress);
+    }, [])
+  );
+
   const [beers, setBeers] = useState([]);
   const [beerb, setBeerb] = useState({});
   const [one, setOne] = useState(false);
@@ -16,7 +34,7 @@ function GetData({ route, navigation }) {
           setBeers(res.data);
           console.log("get completed");
         })
-        .catch((res) => {
+        .catch((err) => {
           setBeers({ id: 1, name: "NO SUCH DATA" });
         });
     }, []);
@@ -93,19 +111,26 @@ function GetData({ route, navigation }) {
               height: "100%",
             }}
           >
-            <Text
+            <Pressable
               style={{
                 paddingTop: 25,
                 paddingBottom: 25,
-                textAlign: "center",
-                fontFamily: "GothamMedium",
                 width: "90%",
                 marginTop: 5,
                 marginBottom: 5,
               }}
+              onPress={() => {
+                navigation.navigate("deleteAPI", { id: beerb.id });
+              }}
             >
-              {beerb.name}
-            </Text>
+              <Text
+                style={{
+                  fontFamily: "GothamMedium",
+                }}
+              >
+                {beerb.name}
+              </Text>
+            </Pressable>
             <Text
               style={{
                 paddingTop: 25,
@@ -141,19 +166,26 @@ function GetData({ route, navigation }) {
                   flexWrap: "wrap",
                 }}
               >
-                <Text
+                <Pressable
                   style={{
                     paddingTop: 25,
                     paddingBottom: 25,
-                    paddingLeft: 10,
-                    fontFamily: "GothamMedium",
                     width: "85%",
                     marginTop: 5,
                     marginBottom: 5,
                   }}
+                  onPress={() => {
+                    navigation.navigate("deleteAPI", { id: beer.id });
+                  }}
                 >
-                  {beer.name}
-                </Text>
+                  <Text
+                    style={{
+                      fontFamily: "GothamMedium",
+                    }}
+                  >
+                    {beer.name}
+                  </Text>
+                </Pressable>
                 <Text
                   style={{
                     paddingTop: 25,

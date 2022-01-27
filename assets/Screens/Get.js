@@ -30,6 +30,7 @@ function Get({ navigation }) {
       <View style={styles.circle2}></View>
       <View style={styles.circle1}></View>
       <View style={styles.circle2b}></View>
+
       <Pressable
         style={styles.circle1b}
         onPress={() => {
@@ -52,6 +53,7 @@ function Get({ navigation }) {
         value={id}
         onChangeText={(id) => setID(id)}
       />
+
       {/*Uncomment below element for Sir raimehn's API if will be used*/}
       {/* <TextInput
           placeholder="description"

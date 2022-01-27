@@ -20,13 +20,20 @@ function API({ navigation }) {
       >
         API functions
       </Text>
+
+      {/*Buttons*/}
+
+      {/*GET Button*/}
       <Pressable
         style={styles.presseble}
-        onPress={() => navigation.navigate("getScreen")}
+        onPress={() => {
+          navigation.navigate("getScreen");
+        }}
       >
         <Text style={styles.optionBtn}>GET</Text>
       </Pressable>
 
+      {/*POST Button*/}
       <Pressable
         style={styles.presseble}
         onPress={() => navigation.navigate("postScreen")}
@@ -34,6 +41,7 @@ function API({ navigation }) {
         <Text style={styles.optionBtn}>POST</Text>
       </Pressable>
 
+      {/*UPDATE Button*/}
       <Pressable
         style={styles.presseble}
         onPress={() => navigation.navigate("updateScreen")}
@@ -41,6 +49,7 @@ function API({ navigation }) {
         <Text style={styles.optionBtn}>UPDATE</Text>
       </Pressable>
 
+      {/*DELETE Button*/}
       <Pressable
         style={styles.presseble}
         onPress={() => {
